@@ -37,48 +37,64 @@ let secondCard = null;
 let lockBoard = false;
 
 function startGame() {
-  const width = document.getElementById("width").value;
-  const height = document.getElementById("height").value;
+  const width = parseInt(document.getElementById("width").value, 10);
+  const height = parseInt(document.getElementById("height").value, 10);
 
-  if (isOutOfRange(width, (minVal = 4), (maxVal = 11))) {
-    alert("Ширина должна быть от 4 до 11 ");
+  if (isOutOfRange(width, 4, 11)) {
+    alert("Ширина должна быть от 4 до 11");
     return;
   }
-  if (isOutOfRange(height, (minVal = 3), (maxVal = 6))) {
-    alert("Высота должна быть от 3 до 6 ");
+  if (isOutOfRange(height, 3, 6)) {
+    alert("Высота должна быть от 3 до 6");
     return;
   }
+
   reset();
   setUpBoard(width, height);
-  function setUpBoard(width, height) {
-    const board = document.getElementById("board");
-    board.innerHTML = "";
-    board.style.gridTemplateColumns = `repeat(${width},100px)`;
-    board.style.gridTemplateRows = `repeat(${height},100px)`;
+}
 
-    numberOfCards = width * height;
-    const selectedEmojis = shuffleArray(emojis).slice(0, numberOfCards / 2);
-    const doubleEmojis = [...selectedEmojis, ...selectedEmojis];
-    if (numberOfCards % 2 === 1) {
-      doubleEmojis.push("");
-    }
+function setUpBoard(width, height) {
+  const board = document.getElementById("board");
+  board.innerHTML = "";
+  board.style.gridTemplateColumns = `repeat(${width}, 100px)`;
+  board.style.gridTemplateRows = `repeat(${height}, 100px)`;
 
-    const gameEmojis = shuffleArray(doubleEmojis);
+  numberOfCards = width * height;
 
-    gameEmojis.forEach((emoji) => {
-      const card = document.createElement("div");
-      card.classList.add("card");
-      card.dataset.emoji = emoji;
+  // 1. Берём случайные эмодзи
+  const selectedEmojis = shuffleArray([...emojis]).slice(0, numberOfCards / 2);
 
-      const emojiElement = document.createElement("span");
-      emojiElement.textContent = emoji;
-      emojiElement.style.visibility = "hidden";
-      card.appendChild(emojiElement);
+  // 2. Делаем пары и перемешиваем их
+  const gameEmojis = shuffleArray([...selectedEmojis, ...selectedEmojis]);
 
-      card.addEventListener("click", () => flipCard(card, emojiElement));
-      board.appendChild(card);
-    });
+  // 3. Если нечётное количество карт – добавляем пустую
+  if (numberOfCards % 2 === 1) {
+    gameEmojis.push("");
   }
+
+  // 4. Рендерим карточки
+  gameEmojis.forEach((emoji) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.dataset.emoji = emoji;
+
+    const emojiElement = document.createElement("span");
+    emojiElement.textContent = emoji;
+    emojiElement.style.visibility = "hidden";
+
+    card.appendChild(emojiElement);
+    card.addEventListener("click", () => flipCard(card, emojiElement));
+
+    board.appendChild(card);
+  });
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function flipCard(card, emojiElement) {
@@ -139,9 +155,9 @@ function isOutOfRange(val, minVal, maxVal) {
   return val < minVal || val > maxVal;
 }
 function shuffleArray(array) {
-  for (let i = array.lenght - 1; i > 0; i--) {
+  for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [[array[j], array[i]]];
+    [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 }

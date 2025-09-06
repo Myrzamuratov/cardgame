@@ -89,7 +89,7 @@ input {
   gap: 10px;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 400px) {
   .controls {
     display: flex;
     flex-wrap: wrap;
