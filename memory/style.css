@@ -1,0 +1,159 @@
+/* Общие стили */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* CSS переменные */
+:root {
+  --border-radius-value: 10px;
+  --box-shadow-value: 0 5px 15px rgba(0, 0, 0, 0.3);
+  --light-gray: #c0c0c0;
+  --green: #4caf50;
+}
+
+/* Карточки */
+.card {
+  background: #fea176;
+  width: 100px;
+  height: 100px;
+  border-radius: var(--border-radius-value);
+  cursor: pointer;
+  box-shadow: var(--box-shadow-value);
+  transition: all 0.6s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.card span {
+  transform: rotateY(-180deg);
+}
+
+.card.flipped {
+  background: white;
+  transform: rotateY(180deg);
+}
+
+.card.matched {
+  background: var(--green);
+  cursor: default;
+}
+
+/* Контролы игры */
+.controls {
+  border-radius: var(--border-radius-value);
+  box-shadow: var(--box-shadow-value);
+  width: 80vw;
+  padding: 20px;
+  border: 1px solid var(--light-gray);
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.controls label {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.controls input {
+  width: 100px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray);
+  margin-right: 40px;
+}
+
+.button-success {
+  background: var(--green);
+  cursor: pointer;
+  width: 150px;
+  height: 40px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius-value);
+}
+
+.button-success:hover {
+  background: #3b8c3f;
+}
+
+/* Доска с карточками */
+.board {
+  display: grid;
+  gap: 10px;
+}
+
+/* Кнопка "Главное меню" */
+#backToMenu {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#backToMenu:hover {
+  background-color: #555;
+}
+
+/* Мобильная версия */
+@media (max-width: 400px) {
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between;
+    width: 100%;
+  }
+
+  .controls label {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .controls input {
+    width: 50px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+
+  .controls .button-success {
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+
+  .board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px; /* добавляем небольшой gap между карточками */
+  }
+
+  .card {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 18px; /* уменьшаем размер шрифта на мобильных */
+  }
+}

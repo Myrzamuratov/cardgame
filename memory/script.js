@@ -163,3 +163,7 @@ function shuffleArray(array) {
 }
 
 document.getElementById("start-button").addEventListener("click", startGame);
+const backButton = document.getElementById("backToMenu");
+backButton.addEventListener("click", () => {
+  window.location.href = "../index.html"; // возвращаемся в корень
+});
