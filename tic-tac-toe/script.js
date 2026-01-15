@@ -83,7 +83,7 @@ function checkedForWinOrDraw() {
 function announceWinner(player) {
   const messageElement = document.getElementById("gameMessage");
   let looserplayer = player === "X" ? "O" : "X";
-  messageElement.innerText = `Игрок ${player} победил, игрок ${looserplayer} лох`;
+  messageElement.innerText = `Игрок ${player} победил, а Диана лох`;
 }
 function announceDraw() {
   const messageElement = document.getElementById("gameMessage");
